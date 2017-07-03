@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+require_relative '../lib/slack_big_emoji'
+
+cli = SlackBigEmoji::CLI.new(ARGV)
+emoji = SlackBigEmoji::Converter.new(cli.options)
+unless emoji.valid?
+  abort "Image must be a square, w/h ratio of 1.0"
+end
+
+cli.log "File Info"
+cli.log "--------------"
+cli.log "File name", emoji.file_name
+cli.log "Ratio", emoji.ratio
+cli.log "File Resize Spec", emoji.file_resize_spec
+cli.log ""
+cli.log "Options"
+cli.log "--------------"
+cli.log "Tile Width", emoji.tile_width
+cli.log "Crop Size", emoji.crop_size
+cli.log ""
+cli.log "CLI Options"
+cli.log "--------------"
+cli.options.each do |option, value|
+  cli.log "#{option}", value
+end
+
+cli.log ""
+cli.log "Converting"
+cli.log "--------------"
+cli.log "Temp Input", emoji.image.path
+cli.log "Output Dir", emoji.output_dir
+cli.log "Output Path", emoji.output_path
+emoji.convert
+cli.log "Done", "Yes"
+
+unless cli.options[:convert_only]
+  cli.log ""
+  cli.log "Uploading"
+  cli.log "--------------"
+  uploader = SlackBigEmoji::Uploader.new(emoji.file_name)
+  uploader.upload_emojis
+end
+
+cli.log ""
+cli.log "Emoji Grid"
+cli.log "--------------"
+cli.emoji_grid(emoji.output_filename)
