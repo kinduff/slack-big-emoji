@@ -9,7 +9,7 @@ module SlackBigEmoji
       @image = ::MiniMagick::Image.open(options[:file])
       @file_name = File.basename(options[:file], ".*")
       @ratio = @image[:width].to_f/@image[:height].to_f
-      @file_resize_spec = '640x640'
+      @file_resize_spec = (128 * options[:width].to_i).to_s + 'x' + (128 * options[:width].to_i).to_s
       @tile_width = 5
       @crop_size = '128x128'
       @output_dir = options[:output_dir] || @file_name

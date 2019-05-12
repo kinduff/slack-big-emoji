@@ -27,6 +27,10 @@ module SlackBigEmoji
           options[:silent] = true
         end
 
+        opts.on( '-w', '--width=NAME', 'Image width.' ) do |val|
+          options[:width] = val
+        end
+
         options[:convert_only] = false
         opts.on( '-c', '--convert-only', 'Convert image but do not upload.' ) do
           options[:convert_only] = true
@@ -53,8 +57,8 @@ module SlackBigEmoji
     end
 
     def emoji_grid(file_name)
-      25.times do |i|
-        puts "" if i % 5 == 0 && i != 0
+      (@options[:width].to_i * @options[:width].to_i).times do |i|
+        puts "" if i % @options[:width].to_i == 0 && i != 0
         print ":#{file_name}#{("%02d" % i)}:"
       end
       puts # madrs
