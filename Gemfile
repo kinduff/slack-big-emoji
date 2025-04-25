@@ -1,2 +1,2 @@
-
-gem 'slack-big-emoji'
+source 'https://rubygems.org'
+gemspec
