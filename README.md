@@ -26,8 +26,8 @@ Mount dir with the input file and run:
 
 ```
 mkdir myinput
-cp ~/Downloads/07978924c5c34841.png myinput/
-docker run -ti -v $PWD/myinput:/input slack-big-emoji /app/bin/slack-big-emoji -c -o /input/ /input/07978924c5c34841.png
+cp ~/Downloads/example.png myinput/
+docker run -ti -v $PWD/myinput:/input slack-big-emoji /app/bin/slack-big-emoji -c -o /input/ /input/example.png
 ```
 
 ## Installation
