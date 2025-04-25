@@ -23,7 +23,7 @@ module SlackBigEmoji
 
     def convert
       convert_opts = ["-resize", @file_resize_spec, "-crop", @crop_size]
-      Dir.mkdir(@output_dir) unless File.exists?(@output_dir)
+      Dir.mkdir(@output_dir) unless File.exist?(@output_dir)
       ::MiniMagick::Tool::Convert.new do |convert|
         convert << @image.path
         convert.merge! convert_opts
