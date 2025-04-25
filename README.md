@@ -25,7 +25,9 @@ docker build -t slack-big-emoji .
 Mount dir with the input file and run:
 
 ```
-docker run -ti -v $PWD/input:/input slack-big-emoji /app/bin/slack-big-emoji -c -o /input/ /input/filename.png
+mkdir myinput
+cp ~/Downloads/07978924c5c34841.png myinput/
+docker run -ti -v $PWD/myinput:/input slack-big-emoji /app/bin/slack-big-emoji -c -o /input/ /input/07978924c5c34841.png
 ```
 
 ## Installation
