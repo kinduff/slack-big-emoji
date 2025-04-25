@@ -14,6 +14,20 @@ About images:
 - Images must be square or hold a w/h ratio of 1.0, this is going to be validated.
 - No GIF support since Slack's limit is 64kb and it's a pain to generalize optimization.
 
+## Docker
+
+Build:
+
+```
+docker build -t slack-big-emoji .
+```
+
+Mount dir with the input file and run:
+
+```
+docker run -ti -v $PWD/input:/input slack-big-emoji /app/bin/slack-big-emoji -c -o /input/ /input/filename.png
+```
+
 ## Installation
 
 Installation is done through RubyGems, to install run:
